@@ -1,0 +1,17 @@
+---
+- name: ensure fonts directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.fonts"
+    state: directory
+
+- name: droid exists
+  shell: "ls {{ lookup('env', 'HOME') }}/.fonts/Droid*Sans*Mono"
+  register: droid_exists
+  ignore_errors: yes
+
+- name: Download droid
+  when: droid_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/DroidSansMono.zip
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+    remote_src: yes

@@ -1,0 +1,23 @@
+---
+- name: Add neovim
+  community.general.snap:
+    name: nvim
+    classic: true
+
+- name: Add devtools
+  ansible.builtin.apt:
+    name: build-essential
+    state: present
+
+- name: Pull lazyvim
+  ansible.builtin.git:
+    repo: 'https://github.com/LazyVim/starter.git'
+    dest: /home/muzcee/.config/nvim
+
+- name: Change ownership of .config/nvim
+  ansible.builtin.file:
+    path: /home/muzcee/.config/nvim  # Specify the directory path
+    owner: muzcee          # Specify the new owner
+    group: muzcee          # Specify the new group
+    state: directory          # Ensure the path is a directory
+    recurse: yes              # Apply 

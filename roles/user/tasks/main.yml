@@ -1,0 +1,8 @@
+---
+- ansible.builtin.user:
+    name: muzcee
+    state: present
+  register: muzcee_user_registered
+
+- debug:
+    var: muzcee_user_registered

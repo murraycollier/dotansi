@@ -1,0 +1,9 @@
+---
+- name: Run my_role on localhost
+  hosts: localhost
+  become: yes  # Use this if you need sudo privileges
+  roles:
+    - user
+    - starship
+    - neovim
+    - fonts
