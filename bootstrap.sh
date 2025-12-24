@@ -18,4 +18,8 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 
 eval "$(/opt/homebrew/bin/brew shellenv)" &&
 
-brew install ansible 
+brew install ansible &&
+
+touch ~/.zshrc &&
+
+echo 'eval "$(<Homebrew prefix path>/bin/brew shellenv)"' > ~/.zshrc
