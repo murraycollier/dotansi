@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-xcode-select --install
+xcode-select --install &&
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &&
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)" &&
 
-brew install ansible
+brew install ansible 
