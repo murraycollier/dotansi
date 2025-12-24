@@ -1,0 +1,5 @@
+---
+- name: Install Spotify using snap
+  community.general.snap:
+    name: spotify
+    state: present

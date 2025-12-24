@@ -3,7 +3,10 @@
   hosts: localhost
   become: yes  # Use this if you need sudo privileges
   roles:
-    - user
-    - starship
-    - neovim
-    - fonts
+    - { role: user, tags: [ 'user', 'config' ] }
+    - { role: update, tags: [ 'update', 'config' ] }
+    - { role: utils, tags: [ 'utils', 'config' ] }
+    - { role: starship, tags: [ 'starship', 'config' ] }
+    - { role: neovim, tags: [ 'neovim', 'config' ] }
+    - { role: fonts, tags: [ 'fonts', 'config' ] }
+    - { role: spotify, tags: [ 'spotify', 'config' ] }

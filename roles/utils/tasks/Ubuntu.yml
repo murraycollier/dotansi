@@ -1,0 +1,15 @@
+---
+- name: Install various small utils
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - tree
+      - iperf3
+    state: present
+
+- name: Execute command for each item in the list
+  command: nala install "{{ item }}" --assume-yes
+  loop:
+    - cowsay
+    - sl
+
