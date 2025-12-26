@@ -1,0 +1,28 @@
+---
+# Dock items to remove.
+dockitems_remove:
+  - Launchpad
+  - TV
+  - Podcasts
+  - 'App Store'
+  - Books
+  - Maps
+  - Contacts
+  - Freeform
+  - Music
+  - News
+  - 'IPhone Mirroring'
+  - FaceTime
+
+# Dock items to add. `pos` parameter is optional and will place the Dock item
+# in a particular position in the Dock.
+dockitems_persist:
+  - name: "Raycast"
+    path: "/Applications/Raycast.app/"
+    pos: 5
+  - name: "Warp"
+    path: "/Applications/Warp.app/"
+    pos: 10
+
+# Whether to install dockutil or not
+dockutil_install: true

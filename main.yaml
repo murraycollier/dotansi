@@ -1,12 +1,17 @@
 ---
-- name: Run my_role on localhost
+- name: Run my_roles on localhost
   hosts: localhost
-  become: yes  # Use this if you need sudo privileges
   roles:
     - { role: user, tags: [ 'user', 'config' ] }
     - { role: update, tags: [ 'update', 'config' ] }
     - { role: utils, tags: [ 'utils', 'config' ] }
     - { role: starship, tags: [ 'starship', 'config' ] }
+    - { role: fzf, tags: [ 'fzf', 'config' ] }
     - { role: neovim, tags: [ 'neovim', 'config' ] }
     - { role: fonts, tags: [ 'fonts', 'config' ] }
+    - { role: orbstack, tags: [ 'orbstack', 'config' ] }
     - { role: spotify, tags: [ 'spotify', 'config' ] }
+    - { role: lsd, tags: [ 'lsd', 'config' ] }
+    - { role: raycast, tags: [ 'raycast', 'install' ] }
+    - { role: gh, tags: [ 'gh', 'install' ] }
+    - { role: dock, tags: [ 'dock', 'install' ] }
