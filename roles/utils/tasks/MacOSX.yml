@@ -1,8 +1,0 @@
----
-- name: "Utils | MacOSX | Install"
-  community.general.homebrew:
-    name:
-      - tree 
-      - iperf3
-      - neofetch
-    state: present

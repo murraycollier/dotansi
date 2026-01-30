@@ -1,4 +1,5 @@
 ---
-- community.general.homebrew:
+- name: Update all including homebrew
+  community.general.homebrew:
     update_homebrew: true
     upgrade_all: true

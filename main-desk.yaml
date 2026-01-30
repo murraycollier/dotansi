@@ -1,6 +1,6 @@
 ---
 - name: Run my_roles on localhost
-  hosts: localhost
+  hosts: desk
   roles:
     - { role: user, tags: [ 'user', 'config' ] }
     - { role: update, tags: [ 'update', 'config' ] }
@@ -16,3 +16,4 @@
     - { role: raycast, tags: [ 'raycast', 'install' ] }
     - { role: gh, tags: [ 'gh', 'install' ] }
     - { role: dock, tags: [ 'dock', 'install' ] }
+    - { role: docker, tags: [ 'docker', 'install' ] }

@@ -1,0 +1,122 @@
+RED='\033[0;32m'
+NC='\033[0m' # No Color
+#FUNCTIONS###################################################################################################################
+toalias(){
+alname=$(gum input --placeholder "Alias name?")
+echo "alias $alname='$(history 20| cut -c 8-| gum filter)'" >> ~/dotfiles/aliases &&
+tail -5 ~/dotfiles/aliases &&
+source ~/dotfiles/aliases
+}
+
+# Use cheat.sh
+c(){
+  # Ask cheat.sh website for details about a Linux command.
+  curl -m 10 "http://cheat.sh/${1}" 2>/dev/null || printf '%s\n' "[ERROR] Something broke"
+}
+
+rvim()
+{
+vim scp://root@"$1"/"$2"  
+}
+
+catls()
+{
+  [[ -f "$1" ]] && cat "$1" || ls "$1";
+}
+
+lsc(){
+glow "$1"/.*.md && ls -lah "$1"  
+}
+
+lscc(){
+glow .*.md && ls  
+}
+
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+ansishell(){
+ansible "$1" -m shell -a "$2;printf '${RED}-----------------------------${NC}';"
+}
+
+qsong(){
+spotdl "$1" /mnt/arya/media/music/inbox
+}
+
+newbrew() {
+  local dump_commands=('install' 'uninstall') # Include all commands that should do a brew dump
+  local main_command="${1}"
+
+  brew ${@}
+
+  for command in "${dump_commands[@]}"; do
+    [[ "${command}" == "${main_command}" ]] && brew bundle dump --file="${GDRIVE}/configs/Brewfile" --force
+  done
+}
+
+ansip(){
+ansible-inventory --host $1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'
+}
+
+whatpbs(){
+jobinfo=$(ssh pbs-6 qstat -f $1 || ssh pbs-7 qstat -f $1 || ssh pbs1 qstat -f $1)
+echo "$jobinfo" > /dev/tty
+}
+
+vm_ip() {
+    vmid=$(ssh proxssh qm list | gum filter | awk '{ print $1}')
+    ssh proxssh pvesh get /nodes/pve/qemu/$vmid/agent/network-get-interfaces -o json | jq | grep 192 | awk '{ print $2}' | tr -d \" | cut -c 1-13
+}
+
+chb() {
+branch=$(git branch -a | gum choose) && git checkout $branch    
+}
+
+shcommit() {
+commit=$(git log --pretty=format:"%h %aN committed %s %cr" | gum filter | awk '{ print $1}') && git show $commit
+}
+
+je() {
+j $1 && nvim .
+}
+
+#ALIASES######################################################################################################################
+alias gs="git status"
+alias vact="source ~/ansible_env/bin/activate"
+alias arya="cd /Volumes/arya/"
+alias ghd="gh dash"
+alias grepip="grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'"
+alias qssh='~/qssh.sh'
+alias ttswi='~/git/train-times/main.rb departures SWI PAD'
+alias ttpad='~/git/train-times/main.rb departures PAD SWI'
+alias lg='lazygit'
+alias apb="ansible-playbook"
+alias ls="lsd  --group-dirs first"
+alias dotfiles="lsd -Ad .*"
+alias fzfprev="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head ÃÂ·ÃÂ·ÃÂ·-200'"
+alias edalias='nvim ~/.aliases'
+alias pullall='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;'
+alias gdrive='cd ~/gdrive'
+alias weather='curl wttr.in/highworth'
+alias dirsize='sudo du -hs * | sort -rh | head -5'
+alias macddr='find /sys/class/net -mindepth 1 -maxdepth 1 ! -name lo -printf "%P: " -execdir cat {}/address \;'
+alias apb='ansible-playbook'
+alias qlook="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+alias rmkey='ssh-keygen -R'
+alias rmkey='ssh-keygen -R'
+alias cls='clear'
+alias weather='curl wttr.in/highworth'
+alias pullall='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;'
+alias du1="/usr/bin/sudo du -hx --max-depth=1'$@'"
+alias lg='lazygit'
+alias notpushed='git log origin/$(git symbolic-ref --short HEAD)..$(git symbolic-ref --short HEAD)'
+alias which='type'
+alias reload='source ~/.aliases'
+alias qm='ssh proxssh qm'
+alias k='kubectl'

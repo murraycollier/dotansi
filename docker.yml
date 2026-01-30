@@ -1,0 +1,3 @@
+- hosts: desk
+  roles:
+    - ansible-role-docker

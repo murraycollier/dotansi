@@ -1,0 +1,19 @@
+---
+- name: Change default shell to bash
+  ansible.builtin.shell: chsh -s /bin/bash 
+  when: not ansible_facts['env']['SHELL'].endswith('bash')
+  become: true
+
+- name: Template .bashrc file
+  ansible.builtin.template:
+    src: bash_profile.j2
+    dest: "{{ ansible_facts['user_dir'] }}/.bash_profile"
+
+- name: Template bash_aliases
+  ansible.builtin.template:
+    src: bash_aliases.j2 
+    dest: "{{ ansible_facts['user_dir'] }}/.bash_aliases"
+  notify: Reload bashrc
+
+
+

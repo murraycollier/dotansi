@@ -23,6 +23,12 @@ dockitems_persist:
   - name: "Warp"
     path: "/Applications/Warp.app/"
     pos: 10
+  - name: "Chrome"
+    path: "/Applications/Google\ Chrome.app/"
+    pos: 11
+  - name: "Teams"
+    path: "/Applications/Microsoft\ Teams.app/"
+    pos: 12
 
 # Whether to install dockutil or not
 dockutil_install: true
